@@ -322,6 +322,8 @@ function init_db_schema() {
         ),
         "attr" => "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC"
       ),
+      // TODO: Don't create the table if it doesn't already exists. If it does,
+      // send any mail within the quarantine table as raw msg to maildrop
       "quarantine" => array(
         "cols" => array(
           "id" => "INT NOT NULL AUTO_INCREMENT",

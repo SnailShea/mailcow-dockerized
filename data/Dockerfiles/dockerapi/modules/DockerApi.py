@@ -137,6 +137,8 @@ class DockerApi:
       r = re.compile("^[0-9a-fA-F]+$")
       filtered_qids = filter(r.match, request_json['items'])
       if filtered_qids:
+        # TODO: Held mail beyond a certain age should be released with -r flag, to ensure
+        # released mail has adequate chance to retry delivery
         flagged_qids = ['-H %s' % i for i in filtered_qids]
         sanitized_string = str(' '.join(flagged_qids))
         for container in self.sync_docker_client.containers.list(filters=filters):

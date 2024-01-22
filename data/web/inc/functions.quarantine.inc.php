@@ -10,6 +10,7 @@ function quarantine($_action, $_data = null) {
   switch ($_action) {
     case 'quick_delete':
       // Dont return results, just log
+      // TODO: Use docker() to delete item from queue by ID
       $hash = trim($_data);
       if (preg_match("/^([a-f0-9]{64})$/", $hash) === false) {
         logger(array('return' => array(
@@ -53,6 +54,7 @@ function quarantine($_action, $_data = null) {
     break;
     case 'quick_release':
       // Dont return results, just log
+      // TODO: use docker() to unhold item by queue id
       $hash = trim($_data);
       if (preg_match("/^([a-f0-9]{64})$/", $hash) === false) {
         logger(array('return' => array(
@@ -225,6 +227,7 @@ function quarantine($_action, $_data = null) {
     )));
     break;
     case 'delete':
+      // TODO: docker() to remove from queue
       if (!is_array($_data['id'])) {
         $ids = array();
         $ids[] = $_data['id'];
@@ -360,6 +363,7 @@ function quarantine($_action, $_data = null) {
       }
       // Release item
       elseif ($_data['action'] == 'release' || $_data['action'] == 'learnham') {
+        // TODO: unhold and learn
         if (!is_array($_data['id'])) {
           $ids = array();
           $ids[] = $_data['id'];
@@ -612,6 +616,7 @@ function quarantine($_action, $_data = null) {
         }
       }
       elseif ($_data['action'] == 'learnspam') {
+        // TODO: delete from queue and learn spam
         if (!is_array($_data['id'])) {
           $ids = array();
           $ids[] = $_data['id'];
@@ -745,6 +750,7 @@ function quarantine($_action, $_data = null) {
       return true;
     break;
     case 'get':
+      // TODO: Use docker() to retreive queue items based on ACL
       if ($_SESSION['mailcow_cc_role'] == "user") {
         $stmt = $pdo->prepare('SELECT `id`, `qid`, `subject`, LOCATE("VIRUS_FOUND", `symbols`) AS `virus_flag`, `score`, `rcpt`, `sender`, `action`, UNIX_TIMESTAMP(`created`) AS `created`, `notified` FROM `quarantine` WHERE `rcpt` = :mbox');
         $stmt->execute(array(':mbox' => $_SESSION['mailcow_cc_username']));
@@ -803,6 +809,7 @@ function quarantine($_action, $_data = null) {
       return $settings;
     break;
     case 'details':
+      // TODO: Get details about held item by queue id
       if (!is_numeric($_data) || empty($_data)) {
         return false;
       }
@@ -822,6 +829,7 @@ function quarantine($_action, $_data = null) {
       return false;
     break;
     case 'hash_details':
+      // TODO: figure out a way to manage this without quarantine table, with alternate table, etc
       $hash = trim($_data);
       if (preg_match("/^([a-f0-9]{64})$/", $hash) === false) {
         logger(array('return' => array(

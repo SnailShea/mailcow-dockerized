@@ -1773,6 +1773,7 @@ if (isset($_GET['query'])) {
           process_delete_return(mailq('delete', array('qid' => $items)));
         break;
         case "qitem":
+          // TODO: Adapt to new quarantine strategy
           process_delete_return(quarantine('delete', array('id' => $items)));
         break;
         case "bcc":
@@ -1956,9 +1957,11 @@ if (isset($_GET['query'])) {
           process_edit_return(mailbox('edit', 'quarantine_category', array_merge(array('username' => $items), $attr)));
         break;
         case "qitem":
+          // TODO: Adapt to new quarantine strategy
           process_edit_return(quarantine('edit', array_merge(array('id' => $items), $attr)));
         break;
         case "quarantine":
+          // TODO: Adapt to new quarantine strategy
           process_edit_return(quarantine('edit', $attr));
         break;
         case "quota_notification":
