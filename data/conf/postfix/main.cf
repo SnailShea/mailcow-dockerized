@@ -170,6 +170,7 @@ smtputf8_enable = no
 submission_smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
 smtps_smtpd_tls_mandatory_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
 parent_domain_matches_subdomains = debug_peer_list,fast_flush_domains,mynetworks,qmqpd_authorized_clients
-
+# Decrease chance of QUEUE ID collision for quarantined mail
+enable_long_queue_ids = yes
 # DO NOT EDIT ANYTHING BELOW #
 # Overrides #
