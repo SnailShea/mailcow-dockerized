@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# TODO: Use dockerapi instead of 
 
 import smtplib
 import os

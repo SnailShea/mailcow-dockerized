@@ -154,7 +154,8 @@ jQuery(function($){
               "data-order": cellData,
               "data-sort": cellData
             });
-
+            
+            // TODO: Fix bug where this doesn't update when table resizes
             var date = new Date(cellData ? cellData * 1000 : 0);
             var dateString = date.toLocaleDateString(undefined, {year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit"});
             $(td).html(dateString);
